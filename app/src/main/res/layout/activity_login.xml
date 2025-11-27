@@ -3,50 +3,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_login"
-    android:background="#C32F2F"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_login">
+    android:background="@color/sky_blue"
+    tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/login_card"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="password"
-        app:layout_constraintEnd_toEndOf="@+id/editTextText"
-        app:layout_constraintStart_toStartOf="@+id/editTextText"
-        tools:layout_editor_absoluteY="372dp"
-        tools:ignore="MissingConstraints" />
+        android:background="@drawable/transparent_card_background"
+        android:orientation="vertical"
+        android:padding="24dp"
+        tools:layout_editor_absoluteX="66dp"
+        tools:layout_editor_absoluteY="216dp">
 
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="Name"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="288dp"
-        tools:ignore="MissingConstraints" />
+        <TextView
+            android:id="@+id/txt_login_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="@string/title_login"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
-        tools:layout_editor_absoluteY="437dp"
-        tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/edit_txt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:hint="@string/hint_name"
+            android:inputType="text" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="LOGIN"
-        app:layout_constraintBottom_toTopOf="@+id/editTextText"
-        tools:layout_editor_absoluteX="98dp"
-        tools:ignore="MissingConstraints" />
+        <EditText
+            android:id="@+id/edit_txt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/btn_login" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_register_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_description" />
+
+            <TextView
+                android:id="@+id/txt_register_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="@string/register_link" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

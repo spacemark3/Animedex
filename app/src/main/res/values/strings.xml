@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Animedex</string>
+    <string name="title_login">LOGIN</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_login">OK</string>
+    <string name="register_description">Don\'t have an account?</string>
+    <string name="register_link"> Register here </string>
+
 </resources>
