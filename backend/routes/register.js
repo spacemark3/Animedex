@@ -61,4 +61,46 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username e password sono obbligatori' });
+        }
+
+        db.get(
+            'SELECT * FROM users WHERE username = ?',
+            [username],
+            async (err, user) => {
+                if (err) {
+                    return res.status(500).json({ error: 'Errore del server' });
+                }
+
+                if (!user) {
+                    return res.status(401).json({ error: 'Credenziali non valide' });
+                }
+
+                const passwordMatch = await bcrypt.compare(password, user.password);
+
+                if (!passwordMatch) {
+                    return res.status(401).json({ error: 'Credenziali non valide' });
+                }
+
+                res.status(200).json({
+                    message: 'Login completato',
+                    user: {
+                        id: user.id,
+                        username: user.username
+                    }
+                });
+            }
+        );
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Errore del server' });
+    }
+});
+
 module.exports = router;
