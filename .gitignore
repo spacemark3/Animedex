@@ -1,17 +1,10 @@
-# IDE
-.idea/
-*.iml
-
-# Gradle
-.gradle/
-build/
-
-# Local configuration
-local.properties
-
-# OS files
+# 1. ANDROID / GRADLE
+/local.properties
+/.gradle/
+/build/
 .DS_Store
-Thumbs.db
+*.iml
+.idea/
 
 # Logs
 *.log
