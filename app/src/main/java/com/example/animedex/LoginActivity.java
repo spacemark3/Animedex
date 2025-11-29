@@ -14,7 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class LoginActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,19 +23,17 @@ public class LoginActivity extends AppCompatActivity {
         EditText usernameInput = findViewById(R.id.edTextLogin);
         EditText passwordInput = findViewById(R.id.edTextPassword);
         Button btnLogin = findViewById(R.id.btnLogin);
+        TextView txtRegisterLink = findViewById(R.id.registerLink);
+        TextView txtDisplayInfoLogin = findViewById(R.id.txtDisplayInfoLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                String username = usernameInput.getText().toString();
-                String password = passwordInput.getText().toString();
-
-                loginUser(username, password);
+                startActivity(intent);
             }
         });
 
-        TextView txtRegisterLink = findViewById(R.id.click_register_link);
         txtRegisterLink.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
