@@ -6,6 +6,6 @@
 *.iml
 .idea/
 
-# 2. NODE.JS / BACKEND
-backend/node_modules/
-.env
+# Logs
+*.log
+/backend/node_modules
