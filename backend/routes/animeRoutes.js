@@ -2,42 +2,42 @@ const express = require('express');
 const axios = require('axios');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    try {
-        const page = req.query.page || 1;
-        const limit = req.query.limit || 25;
+    router.get('/', async (req, res) => {
+        try {
+            const page = req.query.page || 1;
+            const limit = req.query.limit || 25;
 
-        const response = await axios.get('https://api.jikan.moe/v4/anime', {
-            params: {
-                page: page,
-                limit: limit,
-                order_by: 'score',
-                sort: 'desc'
-            }
-        });
+            const response = await axios.get('https://api.jikan.moe/v4/anime', {
+                params: {
+                    page: page,
+                    limit: limit,
+                    order_by: 'score',
+                    sort: 'desc'
+                }
+            });
 
-        const animeList = response.data.data.map(anime => ({
-            id: anime.mal_id,
-            title: anime.title,
-            image: anime.images.jpg.image_url,
-            score: anime.score
-        }));
+            const animeList = response.data.data.map(anime => ({
+                id: anime.mal_id,
+                title: anime.title,
+                image: anime.images.jpg.image_url,
+                score: anime.score
+            }));
 
-        res.json({
-            success: true,
-            data: animeList,
-            pagination: response.data.pagination
-        });
+            res.json({
+                success: true,
+                data: animeList,
+                pagination: response.data.pagination
+            });
 
-    } catch (error) {
-        console.error('Error fetching anime:', error.message);
-        res.status(500).json({
-            success: false,
-            error: 'Failed to fetch anime data',
-            message: error.message
-        });
-    }
-});
+        } catch (error) {
+            console.error('Error fetching anime:', error.message);
+            res.status(500).json({
+                success: false,
+                error: 'Failed to fetch anime data',
+                message: error.message
+            });
+        }
+    });
 
 router.get('/search', async (req, res) => {
     try {

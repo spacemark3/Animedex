@@ -17,6 +17,7 @@
     <string name="menu_item3"> Forum </string>
     <string name="menu_item4"> Logout </string>
 
-    <string name="desc_mainpage"> Welcome to Animedex, here you can find all the best series ever created.A true Otaku knows that the greatest series are best enjoyed in moderation. Don\'t burn out your mana on one day of binge-watching, save some stamina for tomorrow's episodes!</string>
+    <string name="description"> Welcome to Animedex, here you can find all the best series ever created.A true Otaku knows that the greatest series are best enjoyed in moderation. Don\'t burn out your mana on one day of binge-watching, save some stamina for tomorrow\'s episodes!</string>
+
 
 </resources>
