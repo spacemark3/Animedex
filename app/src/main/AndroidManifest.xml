@@ -15,14 +15,19 @@
         android:theme="@style/Theme.Animedex"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainpageActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"
             android:exported="true"

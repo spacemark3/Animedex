@@ -6,10 +6,17 @@
     <string name="hint_password">Password</string>
     <string name="hint_email"> Email </string>
     <string name="btn_login">OK</string>
-    <string name="register_description">Don\'t have an account?</string>
-    <string name="register_link"> Register here </string>
+    <string name="desc_register">Don\'t have an account?</string>
+    <string name="link_register"> Register here </string>
 
     <string name="title_register"> Welcome newcomer! please fill every field here </string>
     <string name="btn_register"> Register </string>
+
+    <string name="menu_item1"> Profile </string>
+    <string name="menu_item2"> Dashboard </string>
+    <string name="menu_item3"> Forum </string>
+    <string name="menu_item4"> Logout </string>
+
+    <string name="desc_mainpage"> Welcome to Animedex, here you can find all the best series ever created.A true Otaku knows that the greatest series are best enjoyed in moderation. Don\'t burn out your mana on one day of binge-watching, save some stamina for tomorrow's episodes!</string>
 
 </resources>
