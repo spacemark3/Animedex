@@ -1,4 +1,7 @@
 package com.example.animedex;
+
+import com.google.gson.annotations.SerializedName;
+
 public class Anime {
     private int id;
     private String title;
@@ -8,7 +11,8 @@ public class Anime {
     // Fields added for detail API
     private String synopsis;
     private Integer year;
-    private String status;
+
+    private Integer episodes = 0;
     // Default constructor (needed by Gson)
     public Anime() {}
 
@@ -22,8 +26,9 @@ public class Anime {
     public Double getScore() { return score; }
 
     public String getSynopsis() { return synopsis; }
-    public void setSynopsis(String synopsis) { this.synopsis = synopsis; }
-
     public Integer getYear() { return year; }
-    public void setYear(Integer year) { this.year = year; }
+
+    public Integer getEpisodes() {
+        return episodes;
+    }
 }

@@ -1,6 +1,9 @@
 package com.example.animedex;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +24,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AnimeDetailActivity extends AppCompatActivity {
 
-    private TextView title, synopsis,score, year;
+    private TextView title, synopsis,score, year, episodes;
     private ImageView image;
+    private Anime currentAnime;
+    private int userId = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,8 @@ public class AnimeDetailActivity extends AppCompatActivity {
         score = findViewById(R.id.score);
         year = findViewById(R.id.year);
         image = findViewById(R.id.image);
+        episodes = findViewById(R.id.episodes);
+        Button btnAdd = findViewById(R.id.btnAddCompleted);
 
         int animeId = getIntent().getIntExtra("anime_id",-1);
         if (animeId != -1) {
@@ -42,6 +49,13 @@ public class AnimeDetailActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Invalid anime ID", Toast.LENGTH_SHORT).show();
         }
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addAnimeToCompleted();
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -60,15 +74,16 @@ public class AnimeDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiDetailResponse> call, Response<ApiDetailResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Anime anime = response.body().data;
+                    currentAnime = response.body().data;
 
-                    title.setText(anime.getTitle());
-                    synopsis.setText(anime.getSynopsis());
-                    score.setText("Score: " + anime.getScore());
-                    year.setText("Year: " + anime.getYear());
+                    title.setText(currentAnime.getTitle());
+                    synopsis.setText(currentAnime.getSynopsis());
+                    score.setText("Score: " + currentAnime.getScore());
+                    year.setText("Year: " + currentAnime.getYear());
+                    episodes.setText("Episodes:" + currentAnime.getEpisodes());
 
                     Glide.with(AnimeDetailActivity.this)
-                            .load(anime.getImage())
+                            .load(currentAnime.getImage())
                             .into(image);
                 } else {
                     Toast.makeText(AnimeDetailActivity.this, "Failed to load details", Toast.LENGTH_SHORT).show();
@@ -77,6 +92,57 @@ public class AnimeDetailActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ApiDetailResponse> call, Throwable t) {
                 Toast.makeText(AnimeDetailActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void addAnimeToCompleted() {
+
+        if (currentAnime == null) {
+            Toast.makeText(this, "Anime not loaded yet", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:3000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        Log.d("ADD_ANIME", "user_id=" + userId
+                + " anime_id=" + currentAnime.getId()
+                + " title=" + currentAnime.getTitle()
+                + " image_url=" + currentAnime.getImage()
+                + " score=" + currentAnime.getScore()
+                + " episodes=" + currentAnime.getEpisodes());
+
+        ApiService apiService = retrofit.create(ApiService.class);
+        CompletedAnimeRequest request = new CompletedAnimeRequest(
+                userId,
+                currentAnime.getId(),
+                currentAnime.getTitle(),
+                currentAnime.getImage(),
+                currentAnime.getScore(),
+                currentAnime.getEpisodes()
+        );
+
+        Call<ApiCompletedResponse> call = apiService.addCompleted(request);
+
+        call.enqueue(new Callback<ApiCompletedResponse>() {
+            @Override
+            public void onResponse(Call<ApiCompletedResponse> call, Response<ApiCompletedResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(AnimeDetailActivity.this,
+                            "Added to completed!", Toast.LENGTH_LONG).show();
+                } else if (response.code() == 409) {
+                    Toast.makeText(AnimeDetailActivity.this,
+                            "This anime is already in your completed list", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(AnimeDetailActivity.this,
+                            "Error adding anime", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiCompletedResponse> call, Throwable t) {
+                Toast.makeText(AnimeDetailActivity.this, "Server error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
