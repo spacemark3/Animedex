@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     tools:context=".MainpageActivity">
-
     <LinearLayout
         android:id="@+id/header_mainpage"
         android:layout_width="match_parent"
@@ -24,7 +23,6 @@
             android:layout_height="wrap_content"
             android:text="@string/description"/>
     </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/animeRecyclerView"
         android:layout_width="match_parent"

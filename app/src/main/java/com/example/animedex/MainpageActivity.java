@@ -42,38 +42,27 @@ public class MainpageActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // -------------------------------
-        // RecyclerView setup
-        // -------------------------------
-        recyclerView = findViewById(R.id.animeRecyclerView); // ID from your XML
-
-        // Horizontal LinearLayoutManager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(
-                this,
-                LinearLayoutManager.HORIZONTAL,
-                false
-        );
+        recyclerView = findViewById(R.id.animeRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Adapter with empty list first
-        adapter = new AnimeAdapter(this, animeList);
+        adapter = new AnimeAdapter(this, animeList, anime -> {
+            Intent intent = new Intent(MainpageActivity.this, AnimeDetailActivity.class);
+            intent.putExtra("anime_id", anime.getId());
+            startActivity(intent);
+        });
         recyclerView.setAdapter(adapter);
 
         fetchAnimeFromApi();
     }
 
     private void fetchAnimeFromApi() {
-        // 1. Create Retrofit instance
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/") // Use your Node server URL
+                .baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
-        // 2. Create API service
         ApiService apiService = retrofit.create(ApiService.class);
 
-        // 3. Make API call
         Call<ApiResponse> call = apiService.getAnimeList();
         call.enqueue(new Callback<ApiResponse>() {
             @Override
@@ -88,7 +77,6 @@ public class MainpageActivity extends AppCompatActivity {
                     Toast.makeText(MainpageActivity.this, "Failed to load anime", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
                 Log.e("API", "Retrofit call failed", t);
@@ -106,7 +94,7 @@ public class MainpageActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int idItem = item.getItemId();
         if(idItem == R.id.MENU_1){
-            Toast.makeText(this, "Profile",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Profile in progress!",Toast.LENGTH_LONG).show();
         /*Intent profileIntent = new Intent(MainpageActivity.this, ProfileActivity.class);
         startActivity(profileIntent);*/
         }
@@ -116,7 +104,7 @@ public class MainpageActivity extends AppCompatActivity {
             startActivity(dashboardIntent);
         }
         if(idItem == R.id.MENU_3) {
-            Toast.makeText(this, "Forum", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Forum in progress!", Toast.LENGTH_SHORT).show();
         /*Intent forumIntent = new Intent(MainpageActivity.this, ForumActivity.class);
         startActivity(forumIntent);*/
         }
