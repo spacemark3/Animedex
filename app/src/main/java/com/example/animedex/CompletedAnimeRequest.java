@@ -8,9 +8,9 @@ public class CompletedAnimeRequest {
     public String title;
     public String image_url;
     public Double score;
-    public int episodes = 0;
+    public Integer episodes;
 
-    public CompletedAnimeRequest(int user_id, int anime_id, String title, String image_url, Double score, int episodes) {
+    public CompletedAnimeRequest(int user_id, int anime_id, String title, String image_url, Double score, Integer episodes) {
         this.user_id = user_id;
         this.anime_id = anime_id;
         this.title = title;

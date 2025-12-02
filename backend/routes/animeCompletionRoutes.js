@@ -6,13 +6,13 @@ const db = require('../db');
 router.post('/completed', (req, res) => {
     try {
         const { user_id, anime_id, title, image_url, score, episodes } = req.body;
-
+        console.log("episodi: ", episodes);
         if (!user_id || !anime_id || !title) {
             return res.status(400).json({
                 error: 'user_id, anime_id e title sono obbligatori'
             });
         }
-
+        db.serialize(() => {
         db.run(
             'INSERT INTO completed_anime (user_id, anime_id, title, image_url, score, episodes) VALUES (?, ?, ?, ?, ?, ?)',
             [user_id, anime_id, title, image_url, score, episodes],
@@ -28,14 +28,18 @@ router.post('/completed', (req, res) => {
                 res.status(201).json({
                     message: 'Anime aggiunto ai completati',
                     anime: {
+
                         id: this.lastID,
                         user_id,
                         anime_id,
-                        title
+                        title,
+                        score,
+                        episodes
                     }
                 });
             }
         );
+        });
 
     } catch (error) {
         console.error(error);

@@ -64,13 +64,7 @@ public class AnimeDetailActivity extends AppCompatActivity {
         });
     }
     private void fetchAnimeDetails(int id){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiService apiService = retrofit.create(ApiService.class);
-        Call<ApiDetailResponse> call = apiService.getAnimeDetail(id);
-        call.enqueue(new Callback<ApiDetailResponse>() {
+        ApiManager.apiService.getAnimeDetail(id).enqueue(new Callback<ApiDetailResponse>() {
             @Override
             public void onResponse(Call<ApiDetailResponse> call, Response<ApiDetailResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -96,24 +90,16 @@ public class AnimeDetailActivity extends AppCompatActivity {
         });
     }
     private void addAnimeToCompleted() {
-
         if (currentAnime == null) {
             Toast.makeText(this, "Anime not loaded yet", Toast.LENGTH_SHORT).show();
             return;
         }
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
         Log.d("ADD_ANIME", "user_id=" + userId
                 + " anime_id=" + currentAnime.getId()
                 + " title=" + currentAnime.getTitle()
                 + " image_url=" + currentAnime.getImage()
                 + " score=" + currentAnime.getScore()
                 + " episodes=" + currentAnime.getEpisodes());
-
-        ApiService apiService = retrofit.create(ApiService.class);
         CompletedAnimeRequest request = new CompletedAnimeRequest(
                 userId,
                 currentAnime.getId(),
@@ -123,9 +109,7 @@ public class AnimeDetailActivity extends AppCompatActivity {
                 currentAnime.getEpisodes()
         );
 
-        Call<ApiCompletedResponse> call = apiService.addCompleted(request);
-
-        call.enqueue(new Callback<ApiCompletedResponse>() {
+        ApiManager.apiService.addCompleted(request).enqueue(new Callback<ApiCompletedResponse>() {
             @Override
             public void onResponse(Call<ApiCompletedResponse> call, Response<ApiCompletedResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -137,6 +121,7 @@ public class AnimeDetailActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(AnimeDetailActivity.this,
                             "Error adding anime", Toast.LENGTH_LONG).show();
+                    System.out.println("error" + response.message());
                 }
             }
 
