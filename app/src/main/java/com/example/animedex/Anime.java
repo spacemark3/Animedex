@@ -11,9 +11,7 @@ public class Anime {
     // Fields added for detail API
     private String synopsis;
     private Integer year;
-
-    private Integer episodes = 0;
-    // Default constructor (needed by Gson)
+    private Integer episodes;
     public Anime() {}
 
     public int getId() { return id; }

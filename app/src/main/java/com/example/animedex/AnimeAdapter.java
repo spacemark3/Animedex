@@ -36,9 +36,12 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
     @Override
     public void onBindViewHolder(@NonNull AnimeViewHolder holder, int position) {
         Anime anime = animeList.get(position);
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onItemClick(anime);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(anime);
+                }
             }
         });
         holder.title.setText(anime.getTitle());
@@ -46,7 +49,6 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.AnimeViewHol
                 .load(anime.getImage())
                 .placeholder(R.color.dark_gray)
                 .error(R.color.dark_gray)
-
                 .into(holder.image);
         Log.d("Glide", "Loading image URL: " + anime.getImage());
     }
