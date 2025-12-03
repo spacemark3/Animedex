@@ -99,8 +99,10 @@ public class MainpageActivity extends AppCompatActivity {
         startActivity(profileIntent);*/
         }
         if(idItem == R.id.MENU_2) {
+
             Toast.makeText(this, "Dashboard", Toast.LENGTH_SHORT).show();
             Intent dashboardIntent = new Intent(MainpageActivity.this, DashboardActivity.class);
+            Log.d("MenuClick", "Dashboard menu clicked");
             startActivity(dashboardIntent);
         }
         if(idItem == R.id.MENU_3) {

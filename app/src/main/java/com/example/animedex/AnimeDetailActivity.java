@@ -19,8 +19,7 @@ import com.bumptech.glide.Glide;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class AnimeDetailActivity extends AppCompatActivity {
 
@@ -57,7 +56,7 @@ public class AnimeDetailActivity extends AppCompatActivity {
             }
         });
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_detail), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -84,8 +83,7 @@ public class AnimeDetailActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<ApiDetailResponse> call, Throwable t) {
-                Toast.makeText(AnimeDetailActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<ApiDetailResponse> call, Throwable t) {Toast.makeText(AnimeDetailActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -94,12 +92,6 @@ public class AnimeDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "Anime not loaded yet", Toast.LENGTH_SHORT).show();
             return;
         }
-        Log.d("ADD_ANIME", "user_id=" + userId
-                + " anime_id=" + currentAnime.getId()
-                + " title=" + currentAnime.getTitle()
-                + " image_url=" + currentAnime.getImage()
-                + " score=" + currentAnime.getScore()
-                + " episodes=" + currentAnime.getEpisodes());
         CompletedAnimeRequest request = new CompletedAnimeRequest(
                 userId,
                 currentAnime.getId(),
@@ -113,18 +105,13 @@ public class AnimeDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ApiCompletedResponse> call, Response<ApiCompletedResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(AnimeDetailActivity.this,
-                            "Added to completed!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AnimeDetailActivity.this, "Added to completed!", Toast.LENGTH_LONG).show();
                 } else if (response.code() == 409) {
-                    Toast.makeText(AnimeDetailActivity.this,
-                            "This anime is already in your completed list", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AnimeDetailActivity.this, "This anime is already in your completed list", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(AnimeDetailActivity.this,
-                            "Error adding anime", Toast.LENGTH_LONG).show();
-                    System.out.println("error" + response.message());
+                    Toast.makeText(AnimeDetailActivity.this, "Error adding anime", Toast.LENGTH_LONG).show();System.out.println("error" + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ApiCompletedResponse> call, Throwable t) {
                 Toast.makeText(AnimeDetailActivity.this, "Server error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
