@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const db = require('../db');
-
 router.post('/register', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -28,7 +27,6 @@ router.post('/register', async (req, res) => {
                         error: 'Username già esistente'
                     });
                 }
-
                 try {
                     const hashedPassword = await bcrypt.hash(password, 10);
                     db.run(
@@ -54,13 +52,11 @@ router.post('/register', async (req, res) => {
                 }
             }
         );
-
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Errore del server' });
     }
 });
-
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -68,7 +64,6 @@ router.post('/login', async (req, res) => {
         if (!username || !password) {
             return res.status(400).json({ error: 'Username e password sono obbligatori' });
         }
-
         db.get(
             'SELECT * FROM users WHERE username = ?',
             [username],
@@ -86,7 +81,6 @@ router.post('/login', async (req, res) => {
                 if (!passwordMatch) {
                     return res.status(401).json({ error: 'Credenziali non valide' });
                 }
-
                 res.status(200).json({
                     message: 'Login completato',
                     user: {
@@ -96,11 +90,9 @@ router.post('/login', async (req, res) => {
                 });
             }
         );
-
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Errore del server' });
     }
 });
-
 module.exports = router;

@@ -1,8 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('./database.db');
-
 db.exec("PRAGMA journal_mode=WAL;");
-
 db.configure('busyTimeout', 5000);
 
 db.serialize(() => {
@@ -14,14 +12,13 @@ db.serialize(() => {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
-
     db.run(`
     CREATE TABLE IF NOT EXISTS completed_anime (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id INTEGER NOT NULL,
       anime_id INTEGER NOT NULL,
       title TEXT NOT NULL,
-      image_url TEXT,
+      image TEXT,
       score REAL,
       episodes INTEGER,
       added_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -29,6 +26,5 @@ db.serialize(() => {
       UNIQUE(user_id, anime_id)
     )
   `);
-
 });
 module.exports = db;

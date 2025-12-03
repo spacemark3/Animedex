@@ -1,12 +1,10 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-
     router.get('/', async (req, res) => {
         try {
             const page = req.query.page || 1;
             const limit = req.query.limit || 25;
-
             const response = await axios.get('https://api.jikan.moe/v4/anime', {
                 params: {
                     page: page,
@@ -15,20 +13,17 @@ const router = express.Router();
                     sort: 'desc'
                 }
             });
-
             const animeList = response.data.data.map(anime => ({
                 id: anime.mal_id,
                 title: anime.title,
                 image: anime.images.jpg.image_url,
                 score: anime.score
             }));
-
             res.json({
                 success: true,
                 data: animeList,
                 pagination: response.data.pagination
             });
-
         } catch (error) {
             console.error('Error fetching anime:', error.message);
             res.status(500).json({
@@ -38,11 +33,9 @@ const router = express.Router();
             });
         }
     });
-
 router.get('/search', async (req, res) => {
     try {
         const query = req.query.q;
-
         if (!query) {
             return res.status(400).json({
                 success: false,
@@ -56,19 +49,16 @@ router.get('/search', async (req, res) => {
                 limit: 25
             }
         });
-
         const animeList = response.data.data.map(anime => ({
             id: anime.mal_id,
             title: anime.title,
             image: anime.images.jpg.image_url,
             score: anime.score
         }));
-
         res.json({
             success: true,
             data: animeList
         });
-
     } catch (error) {
         console.error('Error searching anime:', error.message);
         res.status(500).json({
@@ -78,15 +68,11 @@ router.get('/search', async (req, res) => {
         });
     }
 });
-
 router.get('/:id', async (req, res) => {
-    console.log("matk mannaggia a te  ", req, res);
     try {
         const { id } = req.params;
 
         const response = await axios.get(`https://api.jikan.moe/v4/anime/${id}`);
-
-
         const anime = {
             id: response.data.data.mal_id,
             title: response.data.data.title,
@@ -96,16 +82,11 @@ router.get('/:id', async (req, res) => {
             year: response.data.data.year,
             episodes: response.data.data.episodes,
             status: response.data.data.status
-
         };
-
-
         res.json({
             success: true,
             data: anime
-
         });
-        console.log("mark   ",response.data.data.episodes);
 
     } catch (error) {
         console.error('Error fetching anime details:', error.message);
@@ -116,5 +97,4 @@ router.get('/:id', async (req, res) => {
         });
     }
 });
-
 module.exports = router;
