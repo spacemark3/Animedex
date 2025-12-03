@@ -13,4 +13,7 @@ public interface ApiService {
     Call<ApiDetailResponse> getAnimeDetail(@Path("id") int id);
     @POST("api/completed")
     Call<ApiCompletedResponse> addCompleted(@Body CompletedAnimeRequest request);
+    @POST("api/completed/list")
+    Call<CompletedListResponse> getCompletedAnimeList(@Body CompletedListRequest request);
+
 }
