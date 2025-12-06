@@ -15,27 +15,27 @@
         android:theme="@style/Theme.Animedex"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".AnimeDetailActivity"
+            android:name=".ui.activities.AnimeDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DashboardActivity"
+            android:name=".ui.activities.DashboardActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainpageActivity"
+            android:name=".ui.activities.MainpageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

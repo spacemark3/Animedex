@@ -1,7 +1,5 @@
-package com.example.animedex;
-
+package com.example.animedex.ui.activities;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +13,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.animedex.R;
+import com.example.animedex.data.model.Anime;
+import com.example.animedex.data.remote.api.response.ApiCompletedResponse;
+import com.example.animedex.data.remote.api.response.ApiDetailResponse;
+import com.example.animedex.data.remote.api.ApiManager;
+import com.example.animedex.data.remote.api.request.CompletedAnimeRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;

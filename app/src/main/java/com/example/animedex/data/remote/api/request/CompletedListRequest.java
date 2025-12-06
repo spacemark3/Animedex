@@ -1,4 +1,4 @@
-package com.example.animedex;
+package com.example.animedex.data.remote.api.request;
 
 public class CompletedListRequest {
     private int user_id;

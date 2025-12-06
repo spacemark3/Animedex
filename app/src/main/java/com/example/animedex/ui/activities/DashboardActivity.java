@@ -1,7 +1,6 @@
-package com.example.animedex;
+package com.example.animedex.ui.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,6 +8,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.animedex.ui.adapters.DashboardAnimeAdapter;
+import com.example.animedex.R;
+import com.example.animedex.data.model.Anime;
+import com.example.animedex.data.remote.api.ApiManager;
+import com.example.animedex.data.remote.api.request.CompletedListRequest;
+import com.example.animedex.data.remote.api.response.CompletedListResponse;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.animedex;
+package com.example.animedex.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.animedex.ui.adapters.AnimeAdapter;
+import com.example.animedex.R;
+import com.example.animedex.data.model.Anime;
+import com.example.animedex.data.remote.api.ApiResponse;
+import com.example.animedex.data.remote.api.ApiService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +64,7 @@ public class MainpageActivity extends AppCompatActivity {
 
     private void fetchAnimeFromApi() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000")
+                .baseUrl("http://10.103.150.49:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);

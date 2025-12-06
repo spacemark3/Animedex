@@ -1,4 +1,10 @@
-package com.example.animedex;
+package com.example.animedex.data.remote.api;
+
+import com.example.animedex.data.remote.api.request.CompletedListRequest;
+import com.example.animedex.data.remote.api.request.CompletedAnimeRequest;
+import com.example.animedex.data.remote.api.response.CompletedListResponse;
+import com.example.animedex.data.remote.api.response.ApiDetailResponse;
+import com.example.animedex.data.remote.api.response.ApiCompletedResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
