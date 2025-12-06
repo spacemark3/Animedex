@@ -1,4 +1,6 @@
-package com.example.animedex;
+package com.example.animedex.data.remote.api.response;
+
+import com.example.animedex.data.model.Anime;
 
 import java.util.List;
 

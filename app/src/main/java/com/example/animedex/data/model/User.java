@@ -1,4 +1,4 @@
-package com.example.animedex;
+package com.example.animedex.data.model;
 
 public class User {
     private int id;

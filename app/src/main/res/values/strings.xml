@@ -9,7 +9,7 @@
     <string name="desc_register">Don\'t have an account?</string>
     <string name="link_register"> Register here </string>
 
-    <string name="title_register"> Welcome newcomer! please fill every field here </string>
+    <string name="title_register"> Create Your Account </string>
     <string name="btn_register"> Register </string>
 
     <string name="menu_item1"> Profile </string>
@@ -18,6 +18,10 @@
     <string name="menu_item4"> Logout </string>
 
     <string name="description"> Welcome to Animedex, here you can find all the best series ever created.A true Otaku knows that the greatest series are best enjoyed in moderation. Don\'t burn out your mana on one day of binge-watching, save some stamina for tomorrow\'s episodes!</string>
+    <string name="login_background">Login_background</string>
+    <string name="login_facebook">button to sign in with facebook</string>
+    <string name="login_apple">button to sign in with apple</string>
+    <string name="login_gmail">button to sign in with gmail</string>
 
 
 </resources>

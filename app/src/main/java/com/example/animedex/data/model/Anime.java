@@ -1,6 +1,4 @@
-package com.example.animedex;
-
-import com.google.gson.annotations.SerializedName;
+package com.example.animedex.data.model;
 
 public class Anime {
     private int id;
