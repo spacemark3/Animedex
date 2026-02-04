@@ -24,7 +24,7 @@
             android:background="@color/dark_gray"
             android:contentDescription="@string/app_name"
             android:adjustViewBounds="true" />
-        
+
         <TextView
             android:id="@+id/cardTitle"
             android:layout_width="match_parent"

@@ -64,7 +64,7 @@ public class MainpageActivity extends AppCompatActivity {
 
     private void fetchAnimeFromApi() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.103.150.49:3000")
+                .baseUrl("http://10.0.2.2:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
